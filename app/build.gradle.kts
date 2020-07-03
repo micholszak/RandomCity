@@ -18,11 +18,19 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        getByName("debug") {
+            isMinifyEnabled = false
+            isDebuggable = true
+            versionNameSuffix = "-Snapshot"
+            applicationIdSuffix = ".debug"
+            matchingFallbacks = listOf("release")
         }
     }
 
@@ -34,5 +42,11 @@ android {
 
 dependencies {
     implementation(deps.kotlin)
+    implementation(project(":randomcity"))
     deps.appCompat.forEach(::implementation)
+
+    implementation(deps.dagger)
+    deps.daggerAndroid.forEach(::implementation)
+    kapt(deps.daggerCompiler)
+    kapt(deps.daggerAndroidProcessor)
 }

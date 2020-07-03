@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
     kotlin("kapt")
     id("kotlin-android-extensions")
@@ -43,10 +43,10 @@ android {
 
 dependencies {
     implementation(deps.kotlin)
+    deps.rxJava.forEach(::api)
+    deps.appCompat.forEach(::api)
     implementation(deps.dagger)
     deps.daggerAndroid.forEach(::implementation)
-    deps.rxJava.forEach(::implementation)
-    deps.appCompat.forEach(::implementation)
     kapt(deps.daggerCompiler)
     kapt(deps.daggerAndroidProcessor)
 

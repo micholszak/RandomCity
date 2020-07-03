@@ -6,7 +6,7 @@ import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class IntervalCityProducer @Inject constructor(
+internal class IntervalCityProducer @Inject constructor(
     schedulersProvider: SchedulersProvider
 ) : CityProducer {
 
