@@ -1,6 +1,3 @@
-import org.gradle.api.artifacts.dsl.DependencyHandler
-import org.gradle.kotlin.dsl.DependencyHandlerScope
-
 object deps {
     internal object versions {
         const val kotlin = "1.3.72"
@@ -10,37 +7,42 @@ object deps {
     }
 
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}"
-    val rxJava = arrayOf(
+    const val desugarJdk = "com.android.tools:desugar_jdk_libs:1.0.5"
+    val rxJava = listOf(
         "io.reactivex.rxjava2:rxjava:2.2.19",
         "io.reactivex.rxjava2:rxandroid:2.1.1"
     )
 
-    const val dagger = "com.google.dagger:dagger:${versions.dagger}"
-    val daggerAndroid = arrayOf(
-        "com.google.dagger:dagger-android:${versions.dagger}",
-        "com.google.dagger:dagger-android-support:${versions.dagger}"
-    )
-    const val daggerCompiler = "com.google.dagger:dagger-compiler:${versions.dagger}"
-    const val daggerAndroidProcessor =
-        "com.google.dagger:dagger-android-processor:${versions.dagger}"
-
-    val room = arrayOf(
+    val room = listOf(
         "androidx.room:room-runtime:${versions.room}",
         "androidx.room:room-rxjava2:${versions.room}"
     )
+    const val roomCompiler = "androidx.room:room-compiler:${versions.room}"
 
     val appCompat = arrayOf(
         "androidx.appcompat:appcompat:1.1.0",
         "androidx.constraintlayout:constraintlayout:1.1.3"
     )
 
-    val jupiter = arrayOf(
+    const val dagger = "com.google.dagger:dagger:${versions.dagger}"
+    val daggerAndroid = listOf(
+        "com.google.dagger:dagger-android:${versions.dagger}",
+        "com.google.dagger:dagger-android-support:${versions.dagger}"
+    )
+    const val daggerCompiler = "com.google.dagger:dagger-compiler:${versions.dagger}"
+    const val daggerAndroidProcessor =
+        "com.google.dagger:dagger-android-processor:${versions.dagger}"
+    const val threeTen = "com.jakewharton.threetenabp:threetenabp:1.2.4"
+
+    val testEssentials = listOf(
         "org.junit.jupiter:junit-jupiter-api:${versions.jUnit5}",
-        "org.junit.jupiter:junit-jupiter-params:${versions.jUnit5}"
+        "org.junit.jupiter:junit-jupiter-params:${versions.jUnit5}",
+        "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0",
+        "org.assertj:assertj-core:3.15.0"
     )
     const val jupiterEngine = "org.junit.jupiter:junit-jupiter-engine:${versions.jUnit5}"
 
-    val espresso = arrayOf(
+    val espresso = listOf(
         "androidx.test.espresso:espresso-core:3.2.0",
         "androidx.test:runner:1.2.0",
         "androidx.test:rules:1.2.0"

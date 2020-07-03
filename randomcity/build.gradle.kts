@@ -28,12 +28,16 @@ android {
     }
 
     compileOptions {
+        coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     sourceSets.getByName("main") {
         java.srcDir("src/main/kotlin")
+    }
+    sourceSets.getByName("test") {
+        java.srcDir("src/test/kotlin")
     }
 }
 
@@ -46,6 +50,7 @@ dependencies {
     kapt(deps.daggerCompiler)
     kapt(deps.daggerAndroidProcessor)
 
-    deps.jupiter.forEach(::implementation)
+    deps.testEssentials.forEach(::testImplementation)
     testRuntimeOnly(deps.jupiterEngine)
+    coreLibraryDesugaring(deps.desugarJdk)
 }
