@@ -6,12 +6,12 @@ import androidx.core.content.ContextCompat
 import com.netguru.randomcity.R
 import com.netguru.randomcity.cities.data.CityColor
 import com.netguru.randomcity.core.Mapper
-import com.netguru.randomcity.producer.model.Color
+import com.netguru.randomcity.producer.data.Color
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CityColorMapper @Inject constructor(
+internal class CityColorMapper @Inject constructor(
     private val context: Context
 ) : Mapper<Color, CityColor> {
 

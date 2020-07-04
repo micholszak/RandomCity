@@ -4,13 +4,13 @@ import com.netguru.randomcity.cities.data.City
 import com.netguru.randomcity.cities.data.CityColor
 import com.netguru.randomcity.core.Mapper
 import com.netguru.randomcity.core.TimeFormatter
-import com.netguru.randomcity.producer.model.CityProducerEntity
-import com.netguru.randomcity.producer.model.Color
+import com.netguru.randomcity.producer.data.CityProducerEntity
+import com.netguru.randomcity.producer.data.Color
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CityMapper @Inject constructor(
+internal class CityMapper @Inject constructor(
     private val colorMapper: Mapper<Color, CityColor>,
     private val timeFormatter: TimeFormatter
 ) : Mapper<CityProducerEntity, City> {

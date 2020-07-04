@@ -1,8 +1,8 @@
 package com.netguru.randomcity.producer
 
 import com.netguru.randomcity.core.reactive.SchedulersProvider
-import com.netguru.randomcity.producer.model.CityProducerEntity
-import com.netguru.randomcity.producer.model.Color
+import com.netguru.randomcity.producer.data.CityProducerEntity
+import com.netguru.randomcity.producer.data.Color
 import io.reactivex.Observable
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -25,13 +25,12 @@ internal class IntervalCityProducer @Inject constructor(
         Observable.interval(INTERVAL_SECONDS, TimeUnit.SECONDS, schedulersProvider.computation)
             .publish()
 
-    override fun startCityProduction(): Observable<CityProducerEntity> {
-        return producer.autoConnect().map {
+    override fun startCityProduction(): Observable<CityProducerEntity> =
+        producer.autoConnect().map {
             CityProducerEntity(
                 uuid = UUID.randomUUID().toString(),
                 cityName = cities.random(),
                 color = Color.from(colors.random())
             )
         }
-    }
 }

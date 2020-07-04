@@ -1,4 +1,4 @@
-package com.netguru.randomcity.producer.model
+package com.netguru.randomcity.producer.data
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.extension.ExtensionContext

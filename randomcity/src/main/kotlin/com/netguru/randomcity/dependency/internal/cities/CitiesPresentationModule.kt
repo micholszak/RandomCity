@@ -6,7 +6,7 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-abstract class CitiesPresentationModule {
+internal abstract class CitiesPresentationModule {
 
     @Binds
     abstract fun bindCitiesPresenter(presenter: CitiesPresenter): CitiesContract.Presenter

@@ -1,4 +1,4 @@
-package com.netguru.randomcity.producer.model
+package com.netguru.randomcity.producer.data
 
 import java.time.LocalDateTime
 

@@ -1,7 +1,7 @@
 package com.netguru.randomcity.producer
 
 import com.netguru.randomcity.core.reactive.TestSchedulersProvider
-import com.netguru.randomcity.producer.model.Color
+import com.netguru.randomcity.producer.data.Color
 import io.reactivex.schedulers.TestScheduler
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
