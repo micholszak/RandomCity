@@ -2,6 +2,7 @@ package com.netguru.app
 
 import com.netguru.app.dependency.ApplicationComponent
 import com.netguru.app.dependency.DaggerApplicationComponent
+import com.netguru.randomcity.producer.CityProducer
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import dagger.android.DispatchingAndroidInjector

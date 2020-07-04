@@ -45,6 +45,7 @@ dependencies {
     implementation(deps.kotlin)
     deps.rxJava.forEach(::api)
     deps.appCompat.forEach(::api)
+    implementation(deps.adapterDelegates)
     implementation(deps.dagger)
     deps.daggerAndroid.forEach(::implementation)
     kapt(deps.daggerCompiler)

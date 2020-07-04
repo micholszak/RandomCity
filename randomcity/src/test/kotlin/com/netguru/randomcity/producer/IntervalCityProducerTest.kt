@@ -1,6 +1,7 @@
 package com.netguru.randomcity.producer
 
 import com.netguru.randomcity.core.reactive.TestSchedulersProvider
+import com.netguru.randomcity.producer.model.Color
 import io.reactivex.schedulers.TestScheduler
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -9,6 +10,7 @@ import java.util.concurrent.TimeUnit
 
 class IntervalCityProducerTest {
 
+    private val expectedCities = listOf("Gdańsk", "Warszawa", "Poznań", "Białystok", "Wrocław", "Katowice", "Kraków")
     private val testScheduler = TestScheduler()
     private val schedulersProvider = TestSchedulersProvider(computation = testScheduler)
     private lateinit var systemUnderTest: IntervalCityProducer
@@ -30,8 +32,8 @@ class IntervalCityProducerTest {
         testScheduler.advanceTimeBy(5L, TimeUnit.SECONDS)
         testObservable.values().isNotEmpty()
         val entity = testObservable.values().first()
-        assertThat(entity.cityName).isIn(IntervalCityProducer.cities)
-        assertThat(entity.color).isIn(IntervalCityProducer.colors)
+        assertThat(entity.cityName).isIn(expectedCities)
+        assertThat(entity.color).isIn(*Color.values())
     }
 
     @Test

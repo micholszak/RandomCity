@@ -12,6 +12,7 @@ object deps {
         "io.reactivex.rxjava2:rxjava:2.2.19",
         "io.reactivex.rxjava2:rxandroid:2.1.1"
     )
+    const val adapterDelegates = "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.0"
 
     val room = listOf(
         "androidx.room:room-runtime:${versions.room}",
@@ -32,7 +33,6 @@ object deps {
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${versions.dagger}"
     const val daggerAndroidProcessor =
         "com.google.dagger:dagger-android-processor:${versions.dagger}"
-    const val threeTen = "com.jakewharton.threetenabp:threetenabp:1.2.4"
 
     val testEssentials = listOf(
         "org.junit.jupiter:junit-jupiter-api:${versions.jUnit5}",

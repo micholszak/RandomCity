@@ -5,7 +5,6 @@ import com.netguru.randomcity.util.LoggerMediator
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.Multibinds
-import javax.inject.Singleton
 
 @Module
 abstract class LoggingMediatorModule {
@@ -14,6 +13,5 @@ abstract class LoggingMediatorModule {
     abstract fun bindLoggers(): Set<Logger>
 
     @Binds
-    @Singleton
     abstract fun bindLoggerMediator(mediator: LoggerMediator): Logger
 }
