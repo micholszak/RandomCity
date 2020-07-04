@@ -26,11 +26,12 @@ internal class IntervalCityProducer @Inject constructor(
             .publish()
 
     override fun startCityProduction(): Observable<CityProducerEntity> =
-        producer.autoConnect().map {
-            CityProducerEntity(
-                uuid = UUID.randomUUID().toString(),
-                cityName = cities.random(),
-                color = Color.from(colors.random())
-            )
-        }
+        producer.autoConnect()
+            .map {
+                CityProducerEntity(
+                    uuid = UUID.randomUUID().toString(),
+                    cityName = cities.random(),
+                    color = Color.from(colors.random())
+                )
+            }
 }
