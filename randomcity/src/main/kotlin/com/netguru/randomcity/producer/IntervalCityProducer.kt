@@ -11,7 +11,8 @@ import javax.inject.Singleton
 
 @Singleton
 internal class IntervalCityProducer @Inject constructor(
-    schedulersProvider: SchedulersProvider
+    schedulersProvider: SchedulersProvider,
+    private val producerDeliveryStrategy: ProducerDeliveryStrategy
 ) : CityProducer {
 
     companion object {
@@ -23,6 +24,7 @@ internal class IntervalCityProducer @Inject constructor(
 
     private val producer =
         Observable.interval(INTERVAL_SECONDS, TimeUnit.SECONDS, schedulersProvider.computation)
+            .filter { producerDeliveryStrategy.shouldDeliverValue() }
             .publish()
 
     override fun startCityProduction(): Observable<CityProducerEntity> =

@@ -1,5 +1,6 @@
-package com.netguru.randomcity.core.reactive
+package com.netguru.randomcity.util
 
+import com.netguru.randomcity.core.reactive.SchedulersProvider
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 

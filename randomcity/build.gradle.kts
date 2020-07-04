@@ -19,7 +19,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -39,13 +39,19 @@ android {
     sourceSets.getByName("test") {
         java.srcDir("src/test/kotlin")
     }
+    sourceSets.getByName("androidTest") {
+        java.srcDir("src/androidTest/kotlin")
+    }
 }
 
 dependencies {
     implementation(deps.kotlin)
-    deps.rxJava.forEach(::api)
-    deps.appCompat.forEach(::api)
     implementation(deps.adapterDelegates)
+    deps.rxJava.forEach(::implementation)
+    deps.appCompat.forEach(::implementation)
+    deps.lifecycleEssentials.forEach(::implementation)
+    kapt(deps.lifecycleCompiler)
+
     implementation(deps.dagger)
     deps.daggerAndroid.forEach(::implementation)
     kapt(deps.daggerCompiler)
@@ -53,5 +59,6 @@ dependencies {
 
     deps.testEssentials.forEach(::testImplementation)
     testRuntimeOnly(deps.jupiterEngine)
+
     coreLibraryDesugaring(deps.desugarJdk)
 }

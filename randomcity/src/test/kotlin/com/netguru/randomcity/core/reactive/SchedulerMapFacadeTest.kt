@@ -1,5 +1,6 @@
 package com.netguru.randomcity.core.reactive
 
+import com.netguru.randomcity.util.TestSchedulersProvider
 import io.reactivex.Observable
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -17,7 +18,8 @@ internal class SchedulerMapFacadeTest {
         private const val SUBSCRIBER = "Something"
     }
 
-    private val schedulerProvider = TestSchedulersProvider()
+    private val schedulerProvider =
+        TestSchedulersProvider()
     private lateinit var facade: SchedulerMapFacade
 
     @BeforeEach

@@ -4,6 +4,7 @@ object deps {
         const val dagger = "2.28.1"
         const val jUnit5 = "5.6.2"
         const val room = "2.2.5"
+        const val lifecycleVersion = "2.2.0"
     }
 
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}"
@@ -34,19 +35,29 @@ object deps {
     const val daggerAndroidProcessor =
         "com.google.dagger:dagger-android-processor:${versions.dagger}"
 
+    val lifecycleEssentials = listOf(
+        "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycleVersion}",
+        "androidx.lifecycle:lifecycle-process:${versions.lifecycleVersion}"
+    )
+    const val lifecycleCompiler =
+        "androidx.lifecycle:lifecycle-compiler:${versions.lifecycleVersion}"
+
+
+    const val jupiterEngine = "org.junit.jupiter:junit-jupiter-engine:${versions.jUnit5}"
+    const val junit5AndroidRunner = "de.mannodermaus.junit5:android-test-runner:1.2.0"
+
     val testEssentials = listOf(
         "org.junit.jupiter:junit-jupiter-api:${versions.jUnit5}",
         "org.junit.jupiter:junit-jupiter-params:${versions.jUnit5}",
-        "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0",
-        "org.assertj:assertj-core:3.15.0"
+        "org.assertj:assertj-core:3.15.0",
+        "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
     )
-    const val jupiterEngine = "org.junit.jupiter:junit-jupiter-engine:${versions.jUnit5}"
-
-    val espresso = listOf(
-        "androidx.test.espresso:espresso-core:3.2.0",
+    val androidTestEssentials = testEssentials + listOf(
         "androidx.test:runner:1.2.0",
-        "androidx.test:rules:1.2.0"
+        "androidx.test:rules:1.2.0",
+        "de.mannodermaus.junit5:android-test-core:1.2.0"
     )
+    const val espresso = "androidx.test.espresso:espresso-core:3.2.0"
 
     object classpath {
         const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
