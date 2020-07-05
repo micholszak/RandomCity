@@ -7,6 +7,7 @@ import com.netguru.randomcity.cache.dao.CityDao
 import com.netguru.randomcity.cache.dao.CityEntity
 import com.netguru.randomcity.core.ApplicationLifecycleOwner
 import com.netguru.randomcity.core.Mapper
+import com.netguru.randomcity.core.application.ApplicationInitializer
 import com.netguru.randomcity.core.reactive.SchedulerFacade
 import com.netguru.randomcity.producer.CityProducer
 import com.netguru.randomcity.producer.data.ProducerEntity
@@ -22,9 +23,9 @@ class LifecycleAwareCityRepository @Inject constructor(
     private val producer: CityProducer,
     private val cityEntityMapper: Mapper<ProducerEntity, CityEntity>,
     private val cityMapper: Mapper<CityEntity, City>
-) : CityRepository, LifecycleObserver {
+) : CityRepository, LifecycleObserver, ApplicationInitializer {
 
-    init {
+    override fun initializeApplication() {
         applicationLifecycleOwner.lifecycle.addObserver(this)
     }
 

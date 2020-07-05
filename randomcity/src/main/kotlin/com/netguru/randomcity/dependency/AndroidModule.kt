@@ -6,9 +6,11 @@ import android.content.res.Resources
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.netguru.randomcity.core.ApplicationLifecycleOwner
+import com.netguru.randomcity.core.application.ApplicationInitializer
 import dagger.Module
 import dagger.Provides
 import dagger.android.AndroidInjectionModule
+import dagger.multibindings.ElementsIntoSet
 import javax.inject.Singleton
 
 @Module(
@@ -17,6 +19,10 @@ import javax.inject.Singleton
     ]
 )
 class AndroidModule {
+
+    @Provides
+    @ElementsIntoSet
+    fun provideApplicationLifecycleDependentSet(): Set<ApplicationInitializer> = emptySet()
 
     @Provides
     @Singleton

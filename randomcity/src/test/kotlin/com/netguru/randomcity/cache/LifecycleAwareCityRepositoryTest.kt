@@ -51,6 +51,7 @@ internal class LifecycleAwareCityRepositoryTest {
             cityEntityMapper = cityEntityMapper,
             cityMapper = cityMapper
         )
+        repository.initializeApplication()
     }
 
     @Nested

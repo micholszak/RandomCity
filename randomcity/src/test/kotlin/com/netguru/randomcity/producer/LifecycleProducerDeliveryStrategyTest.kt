@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class LifecycleRegistryDeliveryStrategyTest {
+class LifecycleProducerDeliveryStrategyTest {
 
     private val testLifecycleOwner = TestApplicationLifecycleOwner()
     private lateinit var deliveryStrategy: LifecycleProducerDeliveryStrategy
@@ -14,6 +14,7 @@ class LifecycleRegistryDeliveryStrategyTest {
     @BeforeEach
     fun setup() {
         deliveryStrategy = LifecycleProducerDeliveryStrategy(testLifecycleOwner)
+        deliveryStrategy.initializeApplication()
     }
 
     @Test

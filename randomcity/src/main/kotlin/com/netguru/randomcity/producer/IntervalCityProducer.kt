@@ -25,13 +25,13 @@ internal class IntervalCityProducer @Inject constructor(
         Observable.interval(INTERVAL_SECONDS, TimeUnit.SECONDS, schedulersProvider.computation)
             .filter { producerDeliveryStrategy.shouldDeliverValue() }
             .publish()
+            .autoConnect()
 
     override fun startCityProduction(): Observable<ProducerEntity> =
-        producer.autoConnect()
-            .map {
-                ProducerEntity(
-                    cityName = cities.random(),
-                    color = Color.from(colors.random())
-                )
-            }
+        producer.map {
+            ProducerEntity(
+                cityName = cities.random(),
+                color = Color.from(colors.random())
+            )
+        }
 }

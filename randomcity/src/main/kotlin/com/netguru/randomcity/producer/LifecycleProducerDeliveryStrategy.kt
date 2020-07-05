@@ -4,19 +4,20 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.netguru.randomcity.core.ApplicationLifecycleOwner
+import com.netguru.randomcity.core.application.ApplicationInitializer
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 internal class LifecycleProducerDeliveryStrategy @Inject constructor(
-    applicationLifecycleOwner: ApplicationLifecycleOwner
+    private val applicationLifecycleOwner: ApplicationLifecycleOwner
 ) : ProducerDeliveryStrategy,
-    LifecycleObserver {
+    LifecycleObserver, ApplicationInitializer {
 
     private val isApplicationRunning: AtomicBoolean = AtomicBoolean(false)
 
-    init {
+    override fun initializeApplication() {
         applicationLifecycleOwner.lifecycle.addObserver(this)
     }
 
@@ -24,12 +25,12 @@ internal class LifecycleProducerDeliveryStrategy @Inject constructor(
         isApplicationRunning.get()
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun applicationWentToForeground() {
+    internal fun applicationWentToForeground() {
         isApplicationRunning.set(true)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun applicationWentToBackground() {
+    internal fun applicationWentToBackground() {
         isApplicationRunning.set(false)
     }
 }
