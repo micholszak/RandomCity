@@ -1,9 +1,9 @@
 package com.netguru.randomcity.producer
 
-import com.netguru.randomcity.producer.data.CityProducerEntity
+import com.netguru.randomcity.producer.data.ProducerEntity
 import io.reactivex.Observable
 
 interface CityProducer {
 
-    fun startCityProduction(): Observable<CityProducerEntity>
+    fun startCityProduction(): Observable<ProducerEntity>
 }

@@ -1,18 +1,21 @@
 package com.netguru.randomcity.cities
 
-import com.netguru.randomcity.cities.data.City
+import com.netguru.randomcity.cache.City
+import com.netguru.randomcity.cache.CityRepository
+import com.netguru.randomcity.cities.data.CityAdapterItem
 import com.netguru.randomcity.core.Mapper
-import com.netguru.randomcity.producer.CityProducer
-import com.netguru.randomcity.producer.data.CityProducerEntity
-import io.reactivex.Observable
+import io.reactivex.Flowable
 import javax.inject.Inject
 
 class GetCities @Inject constructor(
-    private val cityMapper: Mapper<CityProducerEntity, City>,
-    private val producer: CityProducer
+    private val cityAdapterItemMapper: Mapper<City, CityAdapterItem>,
+    private val cityRepository: CityRepository
 ) {
 
-    operator fun invoke(): Observable<City> =
-        producer.startCityProduction()
-            .map(cityMapper::map)
+    operator fun invoke(): Flowable<List<CityAdapterItem>> =
+        cityRepository.getAllCities()
+            .map {
+                it.map(cityAdapterItemMapper::map)
+                    .sortedBy(CityAdapterItem::name)
+            }
 }

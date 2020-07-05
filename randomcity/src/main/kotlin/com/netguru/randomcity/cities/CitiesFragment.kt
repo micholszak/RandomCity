@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.netguru.randomcity.R
 import com.netguru.randomcity.cities.adapter.CityAdapterFactory
-import com.netguru.randomcity.cities.data.City
+import com.netguru.randomcity.cities.data.CityAdapterItem
 import com.netguru.randomcity.core.view.ItemAdapter
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
@@ -50,7 +50,7 @@ class CitiesFragment : Fragment(), CitiesContract.View {
         presenter.viewDestroyed()
     }
 
-    override fun showCities(cities: List<City>) {
+    override fun showCities(cities: List<CityAdapterItem>) {
         adapter.items = cities
     }
 

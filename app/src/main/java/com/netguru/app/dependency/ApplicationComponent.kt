@@ -2,6 +2,7 @@ package com.netguru.app.dependency
 
 import com.netguru.app.RandomCityApplication
 import com.netguru.randomcity.dependency.AndroidModule
+import com.netguru.randomcity.dependency.CacheModule
 import com.netguru.randomcity.dependency.LoggingMediatorModule
 import com.netguru.randomcity.dependency.RandomCityDependenciesModule
 import dagger.Component
@@ -15,7 +16,8 @@ import javax.inject.Singleton
         ApplicationModule::class,
         AndroidModule::class,
         LoggingMediatorModule::class,
-        LoggersModule::class
+        LoggersModule::class,
+        CacheModule::class
     ]
 )
 interface ApplicationComponent : AndroidInjector<RandomCityApplication> {

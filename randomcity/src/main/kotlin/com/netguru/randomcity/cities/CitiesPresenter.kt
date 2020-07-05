@@ -12,9 +12,7 @@ internal class CitiesPresenter @Inject constructor(
         schedulerFacade.subscribe(
             subscriber = this,
             source = getCities(),
-            onNext = { city ->
-                view.showCities(listOf(city))
-            }
+            onNext = view::showCities
         )
     }
 

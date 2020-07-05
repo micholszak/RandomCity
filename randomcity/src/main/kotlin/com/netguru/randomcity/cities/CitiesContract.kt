@@ -1,11 +1,11 @@
 package com.netguru.randomcity.cities
 
-import com.netguru.randomcity.cities.data.City
+import com.netguru.randomcity.cities.data.CityAdapterItem
 
 interface CitiesContract {
 
     interface View {
-        fun showCities(cities: List<City>)
+        fun showCities(cities: List<CityAdapterItem>)
     }
 
     interface Presenter {

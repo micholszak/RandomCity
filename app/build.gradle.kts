@@ -14,6 +14,9 @@ android {
         targetSdkVersion(deps.configuration.targetSdkVersion)
         versionCode = 1
         versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArgument("runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder")
     }
 
     buildTypes {
@@ -38,6 +41,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        exclude("META-INF/LICENSE*")
+    }
 }
 
 dependencies {
@@ -49,4 +56,7 @@ dependencies {
     deps.daggerAndroid.forEach(::implementation)
     kapt(deps.daggerCompiler)
     kapt(deps.daggerAndroidProcessor)
+
+    deps.androidTestEssentials.forEach(::androidTestImplementation)
+    androidTestRuntimeOnly(deps.junit5AndroidRunner)
 }

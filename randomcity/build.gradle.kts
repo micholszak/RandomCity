@@ -47,10 +47,12 @@ android {
 dependencies {
     implementation(deps.kotlin)
     implementation(deps.adapterDelegates)
-    deps.rxJava.forEach(::implementation)
+    deps.rxJava.forEach(::api)
     deps.appCompat.forEach(::implementation)
     deps.lifecycleEssentials.forEach(::implementation)
     kapt(deps.lifecycleCompiler)
+    deps.room.forEach(::api)
+    kapt(deps.roomCompiler)
 
     implementation(deps.dagger)
     deps.daggerAndroid.forEach(::implementation)

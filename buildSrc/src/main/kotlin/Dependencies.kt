@@ -55,7 +55,8 @@ object deps {
     val androidTestEssentials = testEssentials + listOf(
         "androidx.test:runner:1.2.0",
         "androidx.test:rules:1.2.0",
-        "de.mannodermaus.junit5:android-test-core:1.2.0"
+        "de.mannodermaus.junit5:android-test-core:1.2.0",
+        "androidx.arch.core:core-testing:2.1.0"
     )
     const val espresso = "androidx.test.espresso:espresso-core:3.2.0"
 
