@@ -1,7 +1,6 @@
 package com.netguru.randomcity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import com.netguru.randomcity.cities.CitiesFragment
 import dagger.android.support.DaggerAppCompatActivity
 

@@ -42,6 +42,7 @@ object deps {
     const val lifecycleCompiler =
         "androidx.lifecycle:lifecycle-compiler:${versions.lifecycleVersion}"
 
+    const val googleMaps = "com.google.android.gms:play-services-maps:17.0.0"
 
     const val jupiterEngine = "org.junit.jupiter:junit-jupiter-engine:${versions.jUnit5}"
     const val junit5AndroidRunner = "de.mannodermaus.junit5:android-test-runner:1.2.0"
@@ -58,7 +59,6 @@ object deps {
         "de.mannodermaus.junit5:android-test-core:1.2.0",
         "androidx.arch.core:core-testing:2.1.0"
     )
-    const val espresso = "androidx.test.espresso:espresso-core:3.2.0"
 
     object classpath {
         const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
