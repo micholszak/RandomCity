@@ -14,6 +14,7 @@ import com.netguru.randomcity.cities.data.CityAdapterItem
 import com.netguru.randomcity.core.view.ItemAdapter
 import com.netguru.randomcity.map.MapArguments
 import com.netguru.randomcity.map.MapFragment
+import com.netguru.randomcity.util.Logger
 import com.netguru.randomcity.util.navigate
 import com.netguru.randomcity.util.replace
 import dagger.android.support.AndroidSupportInjection
@@ -21,11 +22,16 @@ import javax.inject.Inject
 
 class CitiesFragment : Fragment(), CitiesContract.View {
 
-    @Inject
-    internal lateinit var presenter: CitiesContract.Presenter
+    companion object {
+        private const val TAG = "CITIES"
+    }
 
     @Inject
+    internal lateinit var presenter: CitiesContract.Presenter
+    @Inject
     internal lateinit var cityAdapterFactory: CityAdapterFactory
+    @Inject
+    internal lateinit var logger: Logger
 
     private lateinit var citiesContainer: RecyclerView
     private lateinit var adapter: ItemAdapter
@@ -44,6 +50,7 @@ class CitiesFragment : Fragment(), CitiesContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        logger.log(TAG, "View created")
         citiesContainer = view.findViewById(R.id.city_container)
         setupContainer()
         presenter.viewCreated(this)
@@ -51,16 +58,19 @@ class CitiesFragment : Fragment(), CitiesContract.View {
 
     override fun onResume() {
         super.onResume()
+        logger.log(TAG, "View resumed")
         presenter.viewAvailable()
     }
 
     override fun onPause() {
         super.onPause()
+        logger.log(TAG, "View paused")
         presenter.viewUnavailable()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        logger.log(TAG, "View destroyed")
         presenter.viewDestroyed()
     }
 
