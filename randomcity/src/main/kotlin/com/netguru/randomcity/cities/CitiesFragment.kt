@@ -13,6 +13,8 @@ import com.netguru.randomcity.cities.adapter.CityAdapterFactory
 import com.netguru.randomcity.cities.data.CityAdapterItem
 import com.netguru.randomcity.core.view.ItemAdapter
 import com.netguru.randomcity.map.MapFragment
+import com.netguru.randomcity.util.navigate
+import com.netguru.randomcity.util.replaceFragment
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -48,9 +50,7 @@ class CitiesFragment : Fragment(), CitiesContract.View {
         presenter.viewCreated(this)
 
         if (isTabletLandscape) {
-            childFragmentManager.beginTransaction()
-                .add(R.id.cities_nav_container, MapFragment())
-                .commit()
+            childFragmentManager.navigate(R.id.cities_nav_container, MapFragment())
         }
     }
 
@@ -81,18 +81,9 @@ class CitiesFragment : Fragment(), CitiesContract.View {
 
     private fun navigateToMap(item: CityAdapterItem) {
         if (isTabletLandscape) {
-            childFragmentManager.beginTransaction()
-                .replace(R.id.cities_nav_container, MapFragment())
-                .commit()
+            childFragmentManager.replaceFragment(R.id.cities_nav_container, MapFragment())
         } else {
-            val rootFrame = parentFragmentManager.findFragmentById(R.id.main_container)
-            parentFragmentManager.beginTransaction().apply {
-                if (rootFrame != null) {
-                    hide(rootFrame)
-                }
-                add(R.id.main_container, MapFragment())
-                addToBackStack(null)
-            }.commit()
+            parentFragmentManager.navigate(R.id.main_container, MapFragment())
         }
     }
 }
