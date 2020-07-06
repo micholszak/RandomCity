@@ -8,19 +8,14 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/cities" />
+        app:navigationIcon="@drawable/ic_arrow_back_24"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/city_container"
+    <FrameLayout
+        android:id="@+id/map_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header" />
-
-    <FrameLayout
-        android:id="@+id/cities_nav_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
