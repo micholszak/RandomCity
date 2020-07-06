@@ -21,12 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.netguru.randomcity.MainActivity"
-            android:configChanges="orientation|screenSize" />
+        <activity android:name="com.netguru.randomcity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_api_key"/>
+            android:value="@string/google_maps_api_key" />
     </application>
 </manifest>

@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.netguru.randomcity.R
@@ -55,10 +57,19 @@ class CitiesFragment : Fragment(), CitiesContract.View {
     }
 
     private fun setupContainer() {
-        adapter = cityAdapterFactory.create { city ->
-            //todo
-        }
+        adapter = cityAdapterFactory.create(::navigateToMap)
         citiesContainer.layoutManager = LinearLayoutManager(context)
         citiesContainer.adapter = adapter
+    }
+
+    private fun navigateToMap(item: CityAdapterItem) {
+        val isTabletLandscape = resources.getBoolean(R.bool.isTabletLandscape)
+        if (isTabletLandscape) {
+            val navHostFragment: NavHostFragment? =
+                childFragmentManager.findFragmentById(R.id.cities_nav_container) as NavHostFragment?
+            navHostFragment?.navController?.navigate(R.id.map_fragment)
+        } else {
+            findNavController().navigate(R.id.cities_to_map)
+        }
     }
 }

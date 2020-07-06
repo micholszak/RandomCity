@@ -54,6 +54,7 @@ dependencies {
     deps.room.forEach(::api)
     kapt(deps.roomCompiler)
     implementation(deps.googleMaps)
+    deps.navigation.forEach(::implementation)
 
     implementation(deps.dagger)
     deps.daggerAndroid.forEach(::implementation)
