@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class CityDelegateFactory @Inject constructor() {
 
-    fun create() = adapterDelegate<CityAdapterItem, AdapterItem>(R.layout.delegate_city) {
+    fun create(onCityClick: (CityAdapterItem) -> Unit) = adapterDelegate<CityAdapterItem, AdapterItem>(R.layout.delegate_city) {
         val name: TextView = itemView.findViewById(R.id.name)
         val timestamp: TextView = itemView.findViewById(R.id.timestamp)
 
@@ -17,6 +17,9 @@ class CityDelegateFactory @Inject constructor() {
             name.text = item.name
             name.setTextColor(item.textColor)
             timestamp.text = context.getString(R.string.created_at, item.creationTimestamp)
+            itemView.setOnClickListener {
+                onCityClick(item)
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ class CitiesFragment : Fragment(), CitiesContract.View {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? =
-        inflater.inflate(R.layout.fragment_city, container, false)
+        inflater.inflate(R.layout.fragment_cities, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,7 +55,9 @@ class CitiesFragment : Fragment(), CitiesContract.View {
     }
 
     private fun setupContainer() {
-        adapter = cityAdapterFactory.create()
+        adapter = cityAdapterFactory.create { city ->
+            //todo
+        }
         citiesContainer.layoutManager = LinearLayoutManager(context)
         citiesContainer.adapter = adapter
     }

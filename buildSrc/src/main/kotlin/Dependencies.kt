@@ -4,7 +4,8 @@ object deps {
         const val dagger = "2.28.1"
         const val jUnit5 = "5.6.2"
         const val room = "2.2.5"
-        const val lifecycleVersion = "2.2.0"
+        const val lifecycleV = "2.2.0"
+        const val navigation = "2.3.0"
     }
 
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}"
@@ -36,11 +37,11 @@ object deps {
         "com.google.dagger:dagger-android-processor:${versions.dagger}"
 
     val lifecycleEssentials = listOf(
-        "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycleVersion}",
-        "androidx.lifecycle:lifecycle-process:${versions.lifecycleVersion}"
+        "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycleV}",
+        "androidx.lifecycle:lifecycle-process:${versions.lifecycleV}"
     )
     const val lifecycleCompiler =
-        "androidx.lifecycle:lifecycle-compiler:${versions.lifecycleVersion}"
+        "androidx.lifecycle:lifecycle-compiler:${versions.lifecycleV}"
 
     const val googleMaps = "com.google.android.gms:play-services-maps:17.0.0"
 
