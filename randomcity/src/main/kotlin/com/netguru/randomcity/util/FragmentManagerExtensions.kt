@@ -27,3 +27,7 @@ fun FragmentManager.navigateBack() {
         popBackStack()
     }
 }
+
+fun FragmentManager.clearBackStack() {
+    popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+}
