@@ -19,10 +19,10 @@ class InMemoryCityDao : CityDao {
         entities.add(entity.apply {
             id = nextId.incrementAndGet()
         })
-        entitiesSubject.onNext(entities)
+        entitiesSubject.onNext(entities.sortedBy(CityEntity::name))
     }
 
-    override fun getAll(): Flowable<List<CityEntity>> =
+    override fun getAllSortedAlphabetically(): Flowable<List<CityEntity>> =
         entitiesSubject.toFlowable(BackpressureStrategy.LATEST)
 
     private fun List<CityEntity>.getInitialId() =

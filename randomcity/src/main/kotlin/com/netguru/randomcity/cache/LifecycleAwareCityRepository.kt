@@ -31,7 +31,7 @@ class LifecycleAwareCityRepository @Inject constructor(
 
     override fun getAllCities(): Flowable<List<City>> =
         Flowable.defer {
-            cityDao.getAll()
+            cityDao.getAllSortedAlphabetically()
         }.map { cityEntities ->
             cityEntities.map(cityMapper::map)
         }

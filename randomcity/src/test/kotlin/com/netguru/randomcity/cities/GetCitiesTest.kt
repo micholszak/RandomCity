@@ -28,7 +28,7 @@ internal class GetCitiesTest {
     }
 
     @Test
-    fun `Results should be sorted alphabetically`() {
+    fun `Return results from the call`() {
         val cities = listOf(
             City(name = "Wrocław"),
             City(name = "Katowice"),
@@ -45,11 +45,11 @@ internal class GetCitiesTest {
             .map(CityAdapterItem::name)
 
         val expected = listOf(
-            "Amsterdam",
+            "Wrocław",
+            "Katowice",
             "Hammersmith",
             "Honolulu",
-            "Katowice",
-            "Wrocław",
+            "Amsterdam",
             "Żory"
         )
         assertThat(result).isEqualTo(expected)

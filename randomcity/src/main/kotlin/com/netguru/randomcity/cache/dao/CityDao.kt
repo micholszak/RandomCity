@@ -12,6 +12,6 @@ interface CityDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entity: CityEntity)
 
-    @Query("SELECT * from cities")
-    fun getAll(): Flowable<List<CityEntity>>
+    @Query("SELECT * from cities ORDER by name")
+    fun getAllSortedAlphabetically(): Flowable<List<CityEntity>>
 }

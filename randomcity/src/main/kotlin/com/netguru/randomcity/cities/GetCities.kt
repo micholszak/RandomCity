@@ -14,8 +14,8 @@ class GetCities @Inject constructor(
 
     operator fun invoke(): Flowable<List<CityAdapterItem>> =
         cityRepository.getAllCities()
-            .map {
-                it.map(cityAdapterItemMapper::map)
-                    .sortedBy(CityAdapterItem::name)
-            }
+            .map(::mapModels)
+
+    private fun mapModels(cities: List<City>): List<CityAdapterItem> =
+        cities.map(cityAdapterItemMapper::map)
 }

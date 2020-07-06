@@ -38,7 +38,7 @@ class ApplicationDatabaseTest {
             createdTime = LocalDateTime.MIN
         )
         cityDao.insert(city)
-        val testObserver = cityDao.getAll().test()
+        val testObserver = cityDao.getAllSortedAlphabetically().test()
         val result = testObserver.values().last()
         assertThat(result).hasSize(1)
     }
@@ -54,7 +54,7 @@ class ApplicationDatabaseTest {
         repeat(size) {
             cityDao.insert(city)
         }
-        val testObserver = cityDao.getAll().test()
+        val testObserver = cityDao.getAllSortedAlphabetically().test()
         val result = testObserver.values().last()
         val distinctIds = result.distinctBy(CityEntity::id)
         assertThat(distinctIds).hasSize(size)
