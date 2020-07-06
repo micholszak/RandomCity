@@ -1,6 +1,6 @@
 package com.netguru.randomcity.cities.mapper
 
-import com.netguru.randomcity.cache.City
+import com.netguru.randomcity.cache.data.City
 import com.netguru.randomcity.cities.data.CityColor
 import com.netguru.randomcity.core.Mapper
 import com.netguru.randomcity.core.TimeFormatter

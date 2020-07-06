@@ -1,4 +1,4 @@
-package com.netguru.randomcity.cache
+package com.netguru.randomcity.cache.data
 
 import com.netguru.randomcity.producer.data.Color
 import java.time.LocalDateTime

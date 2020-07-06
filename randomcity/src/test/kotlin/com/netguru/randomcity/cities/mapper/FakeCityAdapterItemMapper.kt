@@ -1,6 +1,6 @@
 package com.netguru.randomcity.cities.mapper
 
-import com.netguru.randomcity.cache.City
+import com.netguru.randomcity.cache.data.City
 import com.netguru.randomcity.cities.data.CityAdapterItem
 import com.netguru.randomcity.core.Mapper
 

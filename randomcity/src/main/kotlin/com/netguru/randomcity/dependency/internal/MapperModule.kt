@@ -1,6 +1,6 @@
 package com.netguru.randomcity.dependency.internal
 
-import com.netguru.randomcity.cache.City
+import com.netguru.randomcity.cache.data.City
 import com.netguru.randomcity.cache.dao.CityEntity
 import com.netguru.randomcity.cache.mapper.CityEntityMapper
 import com.netguru.randomcity.cache.mapper.CityMapper

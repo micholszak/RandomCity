@@ -50,9 +50,9 @@ class CitiesFragment : Fragment(), CitiesContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        logger.log(TAG, "View created")
-        citiesContainer = view.findViewById(R.id.city_container)
+        citiesContainer = view.findViewById(R.id.cities_container)
         setupContainer()
+        logger.log(TAG, "View created")
         presenter.viewCreated(this)
     }
 

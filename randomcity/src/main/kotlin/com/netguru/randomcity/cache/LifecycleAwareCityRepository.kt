@@ -5,6 +5,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.netguru.randomcity.cache.dao.CityDao
 import com.netguru.randomcity.cache.dao.CityEntity
+import com.netguru.randomcity.cache.data.City
 import com.netguru.randomcity.core.ApplicationLifecycleOwner
 import com.netguru.randomcity.core.Mapper
 import com.netguru.randomcity.core.application.ApplicationInitializer
