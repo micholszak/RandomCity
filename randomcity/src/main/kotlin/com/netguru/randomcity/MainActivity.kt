@@ -1,41 +1,36 @@
 package com.netguru.randomcity
 
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.fragment.app.Fragment
 import com.netguru.randomcity.cities.CitiesFragment
-import com.netguru.randomcity.util.clearBackStack
 import com.netguru.randomcity.util.navigateBack
-import com.netguru.randomcity.util.replaceFragment
+import com.netguru.randomcity.util.replace
 import dagger.android.support.DaggerAppCompatActivity
 
 class MainActivity : DaggerAppCompatActivity() {
+
+    private val isTabletLandscape
+        get() = resources.getBoolean(R.bool.isTabletLandscape)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.clearBackStack()
         if (savedInstanceState == null) {
-            supportFragmentManager.replaceFragment(R.id.main_container, CitiesFragment())
-        } else {
-            shouldDisplayBackButton()
-        }
-
-        supportFragmentManager.addOnBackStackChangedListener {
-            shouldDisplayBackButton()
+            supportFragmentManager.replace(R.id.main_container, CitiesFragment())
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            supportFragmentManager.navigateBack()
-            return true
+    override fun onBackPressed() {
+        var handled = false
+        if (isTabletLandscape.not()) {
+            val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.main_container)
+            val childFragmentManager = fragment?.childFragmentManager
+            handled = childFragmentManager.navigateBack()
         }
-        return super.onOptionsItemSelected(item)
-    }
 
-    private fun shouldDisplayBackButton() {
-        val shouldDisplayBack = supportFragmentManager.backStackEntryCount > 0
-        supportActionBar?.setDisplayHomeAsUpEnabled(shouldDisplayBack)
+        if (handled.not()) {
+            super.onBackPressed()
+        }
     }
 }

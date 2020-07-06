@@ -12,9 +12,10 @@ import com.netguru.randomcity.R
 import com.netguru.randomcity.cities.adapter.CityAdapterFactory
 import com.netguru.randomcity.cities.data.CityAdapterItem
 import com.netguru.randomcity.core.view.ItemAdapter
+import com.netguru.randomcity.map.MapArguments
 import com.netguru.randomcity.map.MapFragment
 import com.netguru.randomcity.util.navigate
-import com.netguru.randomcity.util.replaceFragment
+import com.netguru.randomcity.util.replace
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -28,8 +29,6 @@ class CitiesFragment : Fragment(), CitiesContract.View {
 
     private lateinit var citiesContainer: RecyclerView
     private lateinit var adapter: ItemAdapter
-    private val isTabletLandscape
-        get() = resources.getBoolean(R.bool.isTabletLandscape)
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -48,10 +47,6 @@ class CitiesFragment : Fragment(), CitiesContract.View {
         citiesContainer = view.findViewById(R.id.city_container)
         setupContainer()
         presenter.viewCreated(this)
-
-        if (isTabletLandscape) {
-            childFragmentManager.navigate(R.id.cities_nav_container, MapFragment())
-        }
     }
 
     override fun onResume() {
@@ -80,10 +75,12 @@ class CitiesFragment : Fragment(), CitiesContract.View {
     }
 
     private fun navigateToMap(item: CityAdapterItem) {
-        if (isTabletLandscape) {
-            childFragmentManager.replaceFragment(R.id.cities_nav_container, MapFragment())
+        val arguments = MapArguments(cityName = item.name, cityColor = item.textColor)
+        val mapFragment = MapFragment.newInstance(arguments)
+        if (childFragmentManager.backStackEntryCount == 0) {
+            childFragmentManager.navigate(R.id.cities_nav_container, mapFragment)
         } else {
-            parentFragmentManager.navigate(R.id.main_container, MapFragment())
+            childFragmentManager.replace(R.id.cities_nav_container, mapFragment)
         }
     }
 }

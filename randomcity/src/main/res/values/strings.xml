@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" />
+    <string name="cities">Cities</string>
     <string name="created_at">Created at: %1$s</string>
     <string name="app_version">Version name: %1$s</string>
 </resources>

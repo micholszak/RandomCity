@@ -16,18 +16,16 @@ fun FragmentManager.navigate(@IdRes containerId: Int, fragment: Fragment) {
     }.commit()
 }
 
-fun FragmentManager.replaceFragment(@IdRes containerId: Int, fragment: Fragment) {
+fun FragmentManager.replace(@IdRes containerId: Int, fragment: Fragment) {
     beginTransaction()
         .replace(containerId, fragment)
         .commit()
 }
 
-fun FragmentManager.navigateBack() {
-    if (backStackEntryCount > 0) {
+fun FragmentManager?.navigateBack(): Boolean {
+    if (this != null && backStackEntryCount > 0) {
         popBackStack()
+        return true
     }
-}
-
-fun FragmentManager.clearBackStack() {
-    popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+    return false
 }
