@@ -12,6 +12,10 @@ interface CitiesContract {
 
         fun viewCreated(view: View)
 
+        fun viewAvailable()
+
+        fun viewUnavailable()
+
         fun viewDestroyed()
     }
 }

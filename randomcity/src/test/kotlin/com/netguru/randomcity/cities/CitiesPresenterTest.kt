@@ -1,34 +1,25 @@
 package com.netguru.randomcity.cities
 
-import com.netguru.randomcity.cache.City
-import com.netguru.randomcity.cache.CityRepository
 import com.netguru.randomcity.cities.data.CityAdapterItem
-import com.netguru.randomcity.cities.mapper.FakeCityAdapterItemMapper
 import com.netguru.randomcity.core.reactive.SchedulerMapFacade
 import com.netguru.randomcity.util.TestSchedulersProvider
-import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Flowable
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 internal class CitiesPresenterTest {
 
     companion object {
-        private val CITIES = listOf(City())
+        private val CITIES = listOf(
+            CityAdapterItem()
+        )
     }
 
-    private val mockRepository: CityRepository = mock {
-        on { getAllCities() } doReturn Flowable.just(CITIES)
+    private val getCities: GetCities = mock {
+        on { invoke() } doReturn Flowable.just(CITIES)
     }
-    private val getCities = GetCities(
-        cityAdapterItemMapper = FakeCityAdapterItemMapper(),
-        cityRepository = mockRepository
-    )
-    private val schedulerFacade = SchedulerMapFacade(TestSchedulersProvider())
+    private val schedulerFacade = spy(SchedulerMapFacade(TestSchedulersProvider()))
     private val mockView: CitiesContract.View = mock()
     private lateinit var presenter: CitiesPresenter
 
@@ -41,10 +32,21 @@ internal class CitiesPresenterTest {
     }
 
     @Test
-    fun `Deliver values to view on create`() {
-        val captor = argumentCaptor<List<CityAdapterItem>>()
+    fun `Deliver values to view on available`() {
         presenter.viewCreated(mockView)
-        verify(mockView).showCities(captor.capture())
-        assertThat(captor.lastValue).hasSize(CITIES.size)
+        presenter.viewAvailable()
+        verify(mockView).showCities(CITIES)
+    }
+
+    @Test
+    fun `Don't show anything when view was not attached`() {
+        presenter.viewAvailable()
+        verifyZeroInteractions(mockView)
+    }
+
+    @Test
+    fun `Unsubscribe when view is not available`() {
+        presenter.viewUnavailable()
+        verify(schedulerFacade).disposableFor(presenter)
     }
 }

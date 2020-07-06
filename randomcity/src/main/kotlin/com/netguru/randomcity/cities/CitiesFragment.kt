@@ -6,14 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.netguru.randomcity.R
 import com.netguru.randomcity.cities.adapter.CityAdapterFactory
 import com.netguru.randomcity.cities.data.CityAdapterItem
 import com.netguru.randomcity.core.view.ItemAdapter
+import com.netguru.randomcity.map.MapFragment
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -27,6 +26,8 @@ class CitiesFragment : Fragment(), CitiesContract.View {
 
     private lateinit var citiesContainer: RecyclerView
     private lateinit var adapter: ItemAdapter
+    private val isTabletLandscape
+        get() = resources.getBoolean(R.bool.isTabletLandscape)
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -45,6 +46,22 @@ class CitiesFragment : Fragment(), CitiesContract.View {
         citiesContainer = view.findViewById(R.id.city_container)
         setupContainer()
         presenter.viewCreated(this)
+
+        if (isTabletLandscape) {
+            childFragmentManager.beginTransaction()
+                .add(R.id.cities_nav_container, MapFragment())
+                .commit()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.viewAvailable()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.viewUnavailable()
     }
 
     override fun onDestroy() {
@@ -63,13 +80,19 @@ class CitiesFragment : Fragment(), CitiesContract.View {
     }
 
     private fun navigateToMap(item: CityAdapterItem) {
-        val isTabletLandscape = resources.getBoolean(R.bool.isTabletLandscape)
         if (isTabletLandscape) {
-            val navHostFragment: NavHostFragment? =
-                childFragmentManager.findFragmentById(R.id.cities_nav_container) as NavHostFragment?
-            navHostFragment?.navController?.navigate(R.id.map_fragment)
+            childFragmentManager.beginTransaction()
+                .replace(R.id.cities_nav_container, MapFragment())
+                .commit()
         } else {
-            findNavController().navigate(R.id.cities_to_map)
+            val rootFrame = parentFragmentManager.findFragmentById(R.id.main_container)
+            parentFragmentManager.beginTransaction().apply {
+                if (rootFrame != null) {
+                    hide(rootFrame)
+                }
+                add(R.id.main_container, MapFragment())
+                addToBackStack(null)
+            }.commit()
         }
     }
 }
