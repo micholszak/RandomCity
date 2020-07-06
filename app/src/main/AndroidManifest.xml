@@ -11,9 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name="com.netguru.randomcity.splash.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name="com.netguru.randomcity.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
