@@ -5,7 +5,6 @@ object deps {
         const val jUnit5 = "5.6.2"
         const val room = "2.2.5"
         const val lifecycleV = "2.2.0"
-        const val navigation = "2.3.0"
     }
 
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}"
@@ -44,10 +43,6 @@ object deps {
         "androidx.lifecycle:lifecycle-compiler:${versions.lifecycleV}"
 
     const val googleMaps = "com.google.android.gms:play-services-maps:17.0.0"
-    val navigation = listOf(
-        "androidx.navigation:navigation-fragment-ktx:${versions.navigation}",
-        "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
-    )
 
     const val jupiterEngine = "org.junit.jupiter:junit-jupiter-engine:${versions.jUnit5}"
     const val junit5AndroidRunner = "de.mannodermaus.junit5:android-test-runner:1.2.0"
