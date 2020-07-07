@@ -7,6 +7,7 @@ import com.netguru.randomcity.producer.data.ProducerEntity
 import com.netguru.randomcity.util.TestSchedulersProvider
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
 import io.reactivex.Observable
 import org.junit.jupiter.api.Test
@@ -17,7 +18,7 @@ internal class SplashPresenterTest {
     private val mockProducer: CityProducer = mock {
         on { startCityProduction() } doReturn Observable.just(ProducerEntity())
     }
-    private val schedulerFacade: SchedulerFacade = SchedulerMapFacade(TestSchedulersProvider())
+    private val schedulerFacade: SchedulerFacade = spy(SchedulerMapFacade(TestSchedulersProvider()))
     private val mockView: SplashContract.View = mock()
     private val presenter = SplashPresenter(
         navigateToMainActivity = mockNavigation,
@@ -29,5 +30,11 @@ internal class SplashPresenterTest {
     fun `Navigate to another screen after value received`() {
         presenter.onViewCreated(mockView)
         verify(mockNavigation).invoke()
+    }
+
+    @Test
+    fun `Unsubscribe from stream on destroy`() {
+        presenter.onViewDestroyed()
+        verify(schedulerFacade).unsubscribe(presenter)
     }
 }
